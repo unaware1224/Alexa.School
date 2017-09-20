@@ -14,15 +14,15 @@ namespace Alexa.School.Data.Providers.Nutrislice
     /// <summary>
     ///     Food provider using NutriSlice for data.
     /// </summary>
-    internal class FoodProvider : IFoodProvider
+    internal class NutrisliceFoodMenuProvider : IFoodProvider
     {
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="FoodProvider" />.
+        ///     Initializes a new instance of the <see cref="NutrisliceFoodMenuProvider" />.
         /// </summary>
         /// <param name="baseUri">The base URI to the school's Nutrislice website.</param>
-        public FoodProvider([NotNull] Uri baseUri)
+        public NutrisliceFoodMenuProvider([NotNull] Uri baseUri)
         {
             this.BaseUri = baseUri;
         }
@@ -83,14 +83,8 @@ namespace Alexa.School.Data.Providers.Nutrislice
         {
             return new Uri(
                            baseUri: baseUrl,
-                           relativeUri: string.Format(
-                                                      format: "{0}/{1}/{2}",
-                                                      arg0: WebUtility.HtmlEncode(
-                                                                                  value: type.ToString()
-                                                                                             .ToLowerInvariant()),
-                                                      arg1: CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month: date.Month)
-                                                                       .ToLowerInvariant(),
-                                                      arg2: date.Year));
+                           relativeUri:
+                           $"{baseUrl.LocalPath}{WebUtility.HtmlEncode(value: type.ToString() .ToLowerInvariant())}/{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month: date.Month) .ToLowerInvariant()}/{date.Year}");
         }
 
         #endregion

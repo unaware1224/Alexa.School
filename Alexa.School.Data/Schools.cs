@@ -15,7 +15,7 @@ namespace Alexa.School.Data
         /// </summary>
         public static School Current { get; set; } = new School(
                                                                name: "Pemberton",
-                                                               foodProvider: new FoodProvider(
+                                                               foodProvider: new NutrisliceFoodMenuProvider(
                                                                                               baseUri: new Uri(
                                                                                                                uriString: "http://henrico.nutrislice.com/menu/pemberton",
                                                                                                                uriKind: UriKind.Absolute)));
