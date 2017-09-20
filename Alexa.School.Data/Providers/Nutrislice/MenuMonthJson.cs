@@ -1,93 +1,224 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
+namespace Alexa.School.Data.Providers.Nutrislice
 {
     /// <summary>
-    /// Represents the JSON data on the nutrislice site.
+    ///     Represents the JSON data on the nutrislice site.
     /// </summary>
     public class MenuMonthJson
     {
-        public List<Day> days { get; set; }
-        public bool published { get; set; }
-        public int menu_type_id { get; set; }
-        public int? id { get; set; }
-        public DateTime? last_updated { get; set; }
-        public string start_date { get; set; }
+        #region Properties, Indexers
+
+        [JsonProperty(propertyName: "days")]
+        public List<Day> Days { get; set; }
+
+        #endregion
+
+        ////[JsonProperty(propertyName: "published")]
+        ////public bool? Published { get; set; }
+
+        ////[JsonProperty(propertyName: "menu_type_id")]
+        ////public int? MenuTypeId { get; set; }
+
+        ////[JsonProperty(propertyName: "id")]
+        ////public int? Id { get; set; }
+
+        ////[JsonProperty(propertyName: "last_updated")]
+        ////public DateTime? LastUpdated { get; set; }
+
+        ////[JsonProperty(propertyName: "start_date")]
+        ////public string StartDate { get; set; }
     }
 
     public class Day
     {
-        public string date { get; set; }
-        public List<Menu_Items> menu_items { get; set; }
+        #region Properties, Indexers
+
+        [JsonProperty(propertyName: "date")]
+        public string Date { get; set; }
+
+        [JsonProperty(propertyName: "menu_items")]
+        public List<MenuItem> MenuItems { get; set; }
+
+        #endregion
     }
 
-    public class Menu_Items
+    public class MenuItem
     {
-        public int? id { get; set; }
-        public string date { get; set; }
-        public int? position { get; set; }
-        public bool is_section_title { get; set; }
-        public bool bold { get; set; }
-        public string text { get; set; }
-        public bool no_line_break { get; set; }
-        public bool blank_line { get; set; }
-        public int? menu_type_id { get; set; }
-        public Food food { get; set; }
-        public int? menu_week_id { get; set; }
-        public bool is_holiday { get; set; }
-        //public object station_id { get; set; }
-        public string category { get; set; }
+        #region Properties, Indexers
+
+        [JsonProperty(propertyName: "id")]
+        public int? Id { get; set; }
+
+        [JsonProperty(propertyName: "date")]
+        public string Date { get; set; }
+
+        [JsonProperty(propertyName: "position")]
+        public int? Position { get; set; }
+
+        [JsonProperty(propertyName: "is_section_title")]
+        public bool IsSectionTitle { get; set; }
+
+        [JsonProperty(propertyName: "bold")]
+        public bool Bold { get; set; }
+
+        [JsonProperty(propertyName: "text")]
+        public string Text { get; set; }
+
+        [JsonProperty(propertyName: "no_line_break")]
+        public bool NoLineBreak { get; set; }
+
+        [JsonProperty(propertyName: "blank_line")]
+        public bool? BlankLine { get; set; }
+
+        [JsonProperty(propertyName: "menu_type_id")]
+        public int? MenuTypeId { get; set; }
+
+        [JsonProperty(propertyName: "food")]
+        public Food Food { get; set; }
+
+        ////[JsonProperty(propertyName: "menu_week_id")]
+        ////public int? MenuWeekId { get; set; }
+
+        ////[JsonProperty(propertyName: "is_holiday")]
+        ////public bool IsHoliday { get; set; }
+
+        ////public object station_id { get; set; }
+
+        [JsonProperty(propertyName: "category")]
+        public string Category { get; set; }
+
+        #endregion
     }
 
     public class Food
     {
-        public int? id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string subtext { get; set; }
-        public string image_url { get; set; }
-        public string hoverpic_url { get; set; }
-        public string price { get; set; }
-        public string ingredients { get; set; }
-        public string food_category { get; set; }
-        public Food_Highlight_Message food_highlight_message { get; set; }
-        public string file_url { get; set; }
-        public string download_label { get; set; }
-        public Rounded_Nutrition_Info rounded_nutrition_info { get; set; }
-        //public Allergy_Info allergy_info { get; set; }
-        public Food_Group_Info food_group_info { get; set; }
-        public Food_Icon_Info food_icon_info { get; set; }
-        public Serving_Size_Info serving_size_info { get; set; }
-        public bool has_nutrition_info { get; set; }
+        #region Properties, Indexers
+
+        [JsonProperty(propertyName: "id")]
+        public int? Id { get; set; }
+
+        [JsonProperty(propertyName: "name")]
+        public string Name { get; set; }
+
+        ////[JsonProperty(propertyName: "description")]
+        ////public string Description { get; set; }
+
+        ////[JsonProperty(propertyName: "subtext")]
+        ////public string Subtext { get; set; }
+
+        ////[JsonProperty(propertyName: "image_url")]
+        ////public string ImageUrl { get; set; }
+
+        ////[JsonProperty(propertyName: "hoverpic_url")]
+        ////public string HoverpicUrl { get; set; }
+
+        ////[JsonProperty(propertyName: "price")]
+        ////public string Price { get; set; }
+
+        ////[JsonProperty(propertyName: "ingredients")]
+        ////public string Ingredients { get; set; }
+
+        [JsonProperty(propertyName: "food_category")]
+        public string FoodCategory { get; set; }
+
+        #endregion
+
+        ////[JsonProperty(propertyName: "food_highlight_message")]
+        ////public FoodHighlightMessage FoodHighlightMessage { get; set; }
+
+        ////[JsonProperty(propertyName: "file_url")]
+        ////public string FileUrl { get; set; }
+
+        ////[JsonProperty(propertyName: "download_label")]
+        ////public string DownloadLabel { get; set; }
+
+        ////[JsonProperty(propertyName: "rounded_nutrition_info")]
+        ////public RoundedNutritionInfo RoundedNutritionInfo { get; set; }
+
+        ////////public Allergy_Info allergy_info { get; set; }
+
+        ////[JsonProperty(propertyName: "food_group_info")]
+        ////public FoodGroupInfo FoodGroupInfo { get; set; }
+
+        ////[JsonProperty(propertyName: "food_icon_info")]
+        ////public FoodIconInfo FoodIconInfo { get; set; }
+
+        ////[JsonProperty(propertyName: "serving_size_info")]
+        ////public ServingSizeInfo ServingSizeInfo { get; set; }
+
+        ////[JsonProperty(propertyName: "has_nutrition_info")]
+        ////public bool? HasNutritionInfo { get; set; }
     }
 
-    public class Food_Highlight_Message
-    {
-        public string header_text { get; set; }
-        public string normal_text { get; set; }
-        public string color { get; set; }
-    }
+    ////public class FoodHighlightMessage
+    ////{
+    ////    #region Properties, Indexers
 
-    public class Rounded_Nutrition_Info
-    {
-        public float? calories { get; set; }
-        public float? g_fat { get; set; }
-        public float? g_saturated_fat { get; set; }
-        public int? g_trans_fat { get; set; }
-        public float? mg_cholesterol { get; set; }
-        public float? g_carbs { get; set; }
-        public float? g_sugar { get; set; }
-        public float? mg_sodium { get; set; }
-        public float? g_fiber { get; set; }
-        public float? g_protein { get; set; }
-        public float? mg_iron { get; set; }
-        public float? mg_calcium { get; set; }
-        public float? mg_vitamin_c { get; set; }
-        public float? iu_vitamin_a { get; set; }
-        public float? re_vitamin_a { get; set; }
-    }
+    ////    [JsonProperty(propertyName: "header_text")]
+    ////    public string HeaderText { get; set; }
+
+    ////    [JsonProperty(propertyName: "normal_text")]
+    ////    public string NormalText { get; set; }
+
+    ////    [JsonProperty(propertyName: "color")]
+    ////    public string Color { get; set; }
+
+    ////    #endregion
+    ////}
+
+    ////public class RoundedNutritionInfo
+    ////{
+    ////    #region Properties, Indexers
+
+    ////    [JsonProperty(propertyName: "calories")]
+    ////    public float? Calories { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_fat")]
+    ////    public float? GFat { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_saturated_fat")]
+    ////    public float? GSaturatedFat { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_trans_fat")]
+    ////    public int? GTransFat { get; set; }
+
+    ////    [JsonProperty(propertyName: "mg_cholesterol")]
+    ////    public float? MgCholesterol { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_carbs")]
+    ////    public float? GCarbs { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_sugar")]
+    ////    public float? GSugar { get; set; }
+
+    ////    [JsonProperty(propertyName: "mg_sodium")]
+    ////    public float? MgSodium { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_fiber")]
+    ////    public float? GFiber { get; set; }
+
+    ////    [JsonProperty(propertyName: "g_protein")]
+    ////    public float? GProtein { get; set; }
+
+    ////    [JsonProperty(propertyName: "mg_iron")]
+    ////    public float? MgIron { get; set; }
+
+    ////    [JsonProperty(propertyName: "mg_calcium")]
+    ////    public float? MgCalcium { get; set; }
+
+    ////    [JsonProperty(propertyName: "mg_vitamin_c")]
+    ////    public float? MgVitaminC { get; set; }
+
+    ////    [JsonProperty(propertyName: "iu_vitamin_a")]
+    ////    public float? IuVitaminA { get; set; }
+
+    ////    [JsonProperty(propertyName: "re_vitamin_a")]
+    ////    public float? ReVitaminA { get; set; }
+
+    ////    #endregion
+    ////}
 
     ////public class Allergy_Info
     ////{
@@ -96,30 +227,54 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
     ////    public bool complete_and_approved { get; set; }
     ////}
 
-    public class Allergen
-    {
-        public string name { get; set; }
-        public string slug { get; set; }
-        public bool use_nutrislice_icon { get; set; }
-        public string descriptive_text { get; set; }
-        public bool hide_name { get; set; }
-        public string type { get; set; }
-        public string icon_sprite_css_class { get; set; }
-    }
+    ////public class Allergen
+    ////{
+    ////    #region Properties, Indexers
 
-    public class Food_Group_Info
-    {
-        //public List<string> food_groups { get; set; }
-    }
+    ////    [JsonProperty(propertyName: "name")]
+    ////    public string Name { get; set; }
 
-    public class Food_Icon_Info
-    {
-        //public List<string> food_icons { get; set; }
-    }
+    ////    [JsonProperty(propertyName: "slug")]
+    ////    public string Slug { get; set; }
 
-    public class Serving_Size_Info
-    {
-        public string serving_size_amount { get; set; }
-        public string serving_size_unit { get; set; }
-    }
+    ////    [JsonProperty(propertyName: "use_nutrislice_icon")]
+    ////    public bool UseNutrisliceIcon { get; set; }
+
+    ////    [JsonProperty(propertyName: "descriptive_text")]
+    ////    public string DescriptiveText { get; set; }
+
+    ////    [JsonProperty(propertyName: "hide_name")]
+    ////    public bool HideName { get; set; }
+
+    ////    [JsonProperty(propertyName: "type")]
+    ////    public string Type { get; set; }
+
+    ////    [JsonProperty(propertyName: "icon_sprite_css_class")]
+    ////    public string IconSpriteCssClass { get; set; }
+
+    ////    #endregion
+    ////}
+
+    ////public class FoodGroupInfo
+    ////{
+    ////    //public List<string> food_groups { get; set; }
+    ////}
+
+    ////public class FoodIconInfo
+    ////{
+    ////    //public List<string> food_icons { get; set; }
+    ////}
+
+    ////public class ServingSizeInfo
+    ////{
+    ////    #region Properties, Indexers
+
+    ////    [JsonProperty(propertyName: "serving_size_amount")]
+    ////    public string ServingSizeAmount { get; set; }
+
+    ////    [JsonProperty(propertyName: "serving_size_unit")]
+    ////    public string ServingSizeUnit { get; set; }
+
+    ////    #endregion
+    ////}
 }

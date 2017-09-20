@@ -5,9 +5,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
+using Alexa.School.Data.Providers.Nutrislice;
+using Alexa.School.Data.Providers.Nutrislice.Cleanup;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 
@@ -21,19 +23,17 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         ///     Gets the menu for the given data.
         /// </summary>
         /// <param name="baseUri">The base URI to the data.</param>
-        /// <param name="schoolSlug">The school unique uri slug.</param>
         /// <param name="type">The type of menu to retrieve.</param>
         /// <param name="date">The date to get the menu of.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull, Pure]
         public static async Task<Menu> GetMenuAsync(
             [NotNull] Uri baseUri,
-            [NotNull] string schoolSlug,
             MenuType type,
             DateTime date)
         {
             // download html
-            Stream contentStream = await GetHtmlAsync(baseUri, schoolSlug, type, date);
+            Stream contentStream = await GetHtmlAsync(baseUri, type, date);
 
             // find the html element we want to read the menu from.
             List<string> menuItems = GetMenuData(contentStream, date);
@@ -69,21 +69,15 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
 
                         var data = JsonConvert.DeserializeObject<List<MenuMonthJson>>(json);
 
-                        string dayString = day.ToString("yyyy-MM-dd");
+                        string dayString = day.ToString("yyyy-MM-dd"); // the key for the day we want to find in their JSON
 
-                        var menuItems = data.SelectMany(
-                                                                  dt => dt.days.Where(d => d.date == dayString)
-                                                                          .SelectMany(d => d.menu_items)).ToList();
-                        var specificMenuItems = menuItems
-                                .Where(mi => mi.food != null && mi.food.name.IndexOf("milk", StringComparison.OrdinalIgnoreCase) < 0).ToList();
-
-                        List<string> fixedMenuItems = specificMenuItems
-                                .Select(
-                                        mi => MenuItemCleanup.Cleanup(mi.food.name))
-                                .Where(n => !string.IsNullOrEmpty(n))
-                                .ToList();
-
-                        return fixedMenuItems;
+                        return data.SelectMany(
+                                               dt => dt.Days.Where(d => d.Date == dayString) // find the day we care about
+                                                       .SelectMany(d => d.MenuItems)) // select the menu records
+                                   .Where(MenuItemFilter.Predicate) // filter the records we do not care about
+                                   .Select(mi => mi?.Food?.Name.CleanText()) // adjust the names of the food so that they are Alexa friendly
+                                   .Where(n => !string.IsNullOrEmpty(n)) // remove any blank/useless records
+                                   .ToList();
                     }
                 } while (!sr.EndOfStream);
             }
@@ -94,14 +88,11 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         [NotNull, Pure]
         private static async Task<Stream> GetHtmlAsync(
             [NotNull] Uri baseUrl,
-            [NotNull] string schoolSlug,
             MenuType type,
             DateTime date)
         {
-            var client = new WebClient();
-            byte[] bytes = await client.DownloadDataTaskAsync(GetUrl(baseUrl, schoolSlug, type, date));
-
-            return new MemoryStream(bytes);
+            var client = new HttpClient();
+            return await client.GetStreamAsync(GetUrl(baseUrl, type, date));
         }
 
         /// <summary>
@@ -111,20 +102,18 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         /// <param name="type"></param>
         /// <returns></returns>
         [NotNull, Pure]
-        private static Uri GetUrl([NotNull] Uri baseUrl, [NotNull] string schoolSlug, MenuType type, DateTime date)
+        private static Uri GetUrl([NotNull] Uri baseUrl, MenuType type, DateTime date)
         {
             var uri = new Uri(
                 baseUrl,
                 string.Format(
-                              "/menu/{0}/{1}/{2}/{3}",
-                              HttpUtility.HtmlEncode(schoolSlug),
-                              HttpUtility.HtmlEncode(type.ToString()
+                              "{0}/{1}/{2}",
+                              WebUtility.HtmlEncode(type.ToString()
                                   .ToLowerInvariant()),
                               CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month)
                                          .ToLowerInvariant(),
                               date.Year));
-
-            Trace.Write($"Using {uri}");
+            
             return uri;
         }
 

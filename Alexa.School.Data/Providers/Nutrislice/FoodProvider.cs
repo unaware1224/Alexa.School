@@ -15,11 +15,9 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         ///     Initializes a new instance of the <see cref="FoodProvider" />.
         /// </summary>
         /// <param name="baseUri">The base URI to the school's Nutrislice website.</param>
-        /// <param name="schoolSlug">The unique slug of the school.</param>
-        public FoodProvider([NotNull] Uri baseUri, [NotNull] string schoolSlug)
+        public FoodProvider([NotNull] Uri baseUri)
         {
             this.BaseUri = baseUri;
-            this.SchoolSlug = schoolSlug;
         }
 
         #endregion
@@ -27,23 +25,10 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         #region Properties, Indexers
 
         /// <summary>
-        ///     Gets the base <see cref="Uri" /> to Nutrislice.
+        ///     Gets the <see cref="Uri" /> to Nutrislice.
         /// </summary>
-        /// <remarks>
-        ///     Example: <see cref="http://henrico.nutrislice.com" /> in
-        ///     <see cref="http://henrico.nutrislice.com/menu/pemberton" />.
-        /// </remarks>
         [NotNull]
         public Uri BaseUri { get; set; }
-
-        /// <summary>
-        ///     Gets the name of the school slug.
-        /// </summary>
-        /// <remarks>
-        ///     Example: "pemberton" in <see cref="http://henrico.nutrislice.com/menu/pemberton" />.
-        /// </remarks>
-        [NotNull]
-        public string SchoolSlug { get; set; }
 
         #endregion
 
@@ -52,7 +37,7 @@ namespace Alexa.School.Data.Menus.Food.Provider.Nutrislice
         /// <inheritdoc />
         public Task<Menu> GetMenuAsync(MenuType type, DateTime date)
         {
-            return Parser.GetMenuAsync(baseUri: this.BaseUri, schoolSlug: this.SchoolSlug, type: type, date: date);
+            return Parser.GetMenuAsync(baseUri: this.BaseUri, type: type, date: date);
         }
 
         #endregion
