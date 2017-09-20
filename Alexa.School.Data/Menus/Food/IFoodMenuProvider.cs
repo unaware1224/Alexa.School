@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 
@@ -16,11 +17,11 @@ namespace Alexa.School.Data.Menus.Food
         /// </summary>
         /// <param name="type">The type of menu to retrieve.</param>
         /// <param name="date">The date to get the menu of.</param>
-        /// <returns>An instance of <see cref="Menu"/>.</returns>
+        /// <returns>A list of items on the menu.</returns>
         [NotNull]
         [ItemNotNull]
         [Pure]
-        Task<Menu> GetMenuAsync(
+        Task<List<string>> GetMenuAsync(
             MenuType type,
             DateTime date);
 

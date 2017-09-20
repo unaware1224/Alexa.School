@@ -1,5 +1,5 @@
 ﻿using System;
-using Alexa.School.Data.Menus.Food.Provider.Nutrislice;
+using Alexa.School.Data.Providers.Nutrislice;
 
 namespace Alexa.School.Data
 {
