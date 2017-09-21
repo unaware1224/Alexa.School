@@ -14,7 +14,7 @@ namespace Alexa.School.Data.Providers.Nutrislice
     /// <summary>
     ///     Food provider using NutriSlice for data.
     /// </summary>
-    internal class NutrisliceFoodMenuProvider : IFoodProvider
+    public class NutrisliceFoodMenuProvider : IFoodProvider
     {
         #region Constructors
 
