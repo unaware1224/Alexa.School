@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alexa.School.Data.Menus.Food;
+using AlexaSkillsKit.Slu;
+using AlexaSkillsKit.Speechlet;
+using AlexaSkillsKit.UI;
 using JetBrains.Annotations;
-using Ra.AlexaSkillsKit;
-using Ra.AlexaSkillsKit.UI;
-using Ra.AlexaSkillsKit.UI.Cards;
-using Ra.AlexaSkillsKit.UI.Speech;
 
 namespace Alexa.School.Web.Skills
 {
     /// <summary>
     ///     Facilitates translating requests from Alexa into responses.
     /// </summary>
-    /// <remarks>
-    ///     Using <see cref="https://github.com/realares/Ra.AlexaSkillsKit.NET" />
-    ///     But had to compile locally because the version in NUGET does not have the SpeechletAppAsync, only the non-async
-    ///     version.
-    /// </remarks>
-    public class SchoolSkill : SpeechletAppAsync
+    public class SchoolSkill : SpeechletAsync
     {
         #region Constructors
 
@@ -72,9 +66,8 @@ namespace Alexa.School.Web.Skills
         /// </summary>
         /// <param name="intentRequest">The request from Alexa.</param>
         /// <param name="session">The session information.</param>
-        /// <param name="context">The request context.</param>
         /// <returns>Our response to the request.</returns>
-        public override async Task<SpeechletResponse> OnIntentAsync(IntentRequest intentRequest, Session session, Context context)
+        public override async Task<SpeechletResponse> OnIntentAsync(IntentRequest intentRequest, Session session)
         {
             // Get intent from the request object.
             Intent intent = intentRequest?.Intent;
@@ -108,30 +101,20 @@ namespace Alexa.School.Web.Skills
         /// </summary>
         /// <param name="launchRequest">The launch request.</param>
         /// <param name="session">The session information.</param>
-        /// <param name="context">The request context.</param>
         /// <returns>Our response to the request.</returns>
-        public override Task<SpeechletResponse> OnLaunchAsync(LaunchRequest launchRequest, Session session, Context context)
+        public override Task<SpeechletResponse> OnLaunchAsync(LaunchRequest launchRequest, Session session)
         {
             return Task.FromResult(result: this.BuildResponse(title: "Welcome", message: this.WelcomeMessage, shouldEndSession: false));
         }
 
-        /// <summary>
-        ///     Not familiar this.
-        /// </summary>
-        /// <param name="audioRequest">The audio request.</param>
-        /// <param name="session">The session information.</param>
-        /// <param name="context">The request context.</param>
-        /// <returns>Our response to the request.</returns>
-        public override async Task<SpeechletResponse> OnAudioIntentAsync(AudioPlayerRequest audioRequest, Session session, Context context)
+        public override Task OnSessionStartedAsync(SessionStartedRequest sessionStartedRequest, Session session)
         {
-            ////switch (audioRequest.Type)
-            ////{
-            ////    case RequestTypeEnum.AudioPlayer_PlaybackFailed:
-            ////        AudioPlayerRequest_PlaybackFailed request = audioRequest as AudioPlayerRequest_PlaybackFailed;
-            ////        break;
-            ////}
+            return Task.FromResult(result: this.BuildResponse(title: "Welcome", message: this.WelcomeMessage, shouldEndSession: false));
+        }
 
-            return null;
+        public override Task OnSessionEndedAsync(SessionEndedRequest sessionEndedRequest, Session session)
+        {
+            return Task.FromResult(result: this.BuildResponse(title: "Welcome", message: this.WelcomeMessage, shouldEndSession: false));
         }
 
         #endregion

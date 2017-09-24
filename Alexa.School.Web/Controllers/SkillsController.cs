@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Alexa.School.Data.Providers.Nutrislice;
 using Alexa.School.Web.Skills;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Alexa.School.Web.Controllers
 {
-    [Route(template: "api/[controller]")]
-    public class SkillsController : Controller
+    /// <summary>
+    ///     The controller for responding to queries from Alexa.
+    /// </summary>
+    public class SkillsController : ApiController
     {
         #region Properties, Indexers
 
+        /// <summary>
+        ///     This is where we define which school we are pulling data from.
+        /// </summary>
         [NotNull]
         public Data.School School { get; } = new Data.School(
                                                              name: "Pemberton",

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.School.Data", "Alexa.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.School.Data.Tests", "Alexa.School.Data.Tests\Alexa.School.Data.Tests.csproj", "{0D8A178B-A231-448A-8C37-23FB1A4BE794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.School.Web", "Alexa.School.Web\Alexa.School.Web.csproj", "{2A59E8D9-255D-4B43-93D5-9911170A1AEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.School.Web", "Alexa.School.Web\Alexa.School.Web.csproj", "{DE3C635A-85B7-4B38-9D58-94ACDF55C3DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{0D8A178B-A231-448A-8C37-23FB1A4BE794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D8A178B-A231-448A-8C37-23FB1A4BE794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D8A178B-A231-448A-8C37-23FB1A4BE794}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A59E8D9-255D-4B43-93D5-9911170A1AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A59E8D9-255D-4B43-93D5-9911170A1AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A59E8D9-255D-4B43-93D5-9911170A1AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A59E8D9-255D-4B43-93D5-9911170A1AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3C635A-85B7-4B38-9D58-94ACDF55C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3C635A-85B7-4B38-9D58-94ACDF55C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3C635A-85B7-4B38-9D58-94ACDF55C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3C635A-85B7-4B38-9D58-94ACDF55C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
