@@ -20,11 +20,29 @@ Alexa needs to be able to reach your service publically, and the important part 
 ## Configure your skill in Amazon/Alexa
  - Sign up for a Amazon developer account (note: if you will not be publicly releasing your skill, use the same account your Alexa is tied to)
  - Create a new Alexa Skills Kit, here are some suggestions on configuration:
-  - Skill information
-   - Invocation name: my kids had fun with these, coming with with silly words or characters from books/movies ... though we ended with either the name of the principal or the school.
+   - Skill information
+     - Invocation name: my kids had fun with these, coming with with silly words or characters from books/movies ... though we ended with either the name of the principal or the school.
+   - Interaction Model
+    - Intent Schema (see below)
+    - Custom Slot Types
+      - Type: LIST_OF_MEALS
+       - Values: 
+         - lunch
+         - breakfast
+   - Sample Utterances
+     - WhatsOnTheMenuIntent what is for {Meal} {Date}
+     - WhatsOnTheMenuIntent what is for {Meal} on {Date}
   - Interaction Model
-   - Intent Schema
-   ```
+    - Endpoint type: HTTPS
+    - Default: The endpoint wherever you deployed this
+  - SSL Certificate
+    - Since mine is in Azure, I choose "My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority"
+    
+
+IMPORTANT: If you plan on making your skill publicly available, you need to copy the Application ID from the Skill Information section, and add that to the SchoolSkill constructor in your controller.
+
+Intent schema
+```
    {
   "intents": [
     {
@@ -52,19 +70,3 @@ Alexa needs to be able to reach your service publically, and the important part 
   ]
 }
 ```
-   - Custom Slot Types
-    - Type: LIST_OF_MEALS
-    - Values: 
-     - lunch
-     - breakfast
-   - Sample Utterances
-    - WhatsOnTheMenuIntent what is for {Meal} {Date}
-    - WhatsOnTheMenuIntent what is for {Meal} on {Date}
-  - Interaction Model
-    - Endpoint type: HTTPS
-    - Default: The endpoint wherever you deployed this
-  - SSL Certificate
-    - Since mine is in Azure, I choose "My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority"
-    
-
-IMPORTANT: If you plan on making your skill publicly available, you need to copy the Application ID from the Skill Information section, and add that to the SchoolSkill constructor in your controller.
