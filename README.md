@@ -32,11 +32,11 @@ Alexa needs to be able to reach your service publically, and the important part 
    - Sample Utterances
      - WhatsOnTheMenuIntent what is for {Meal} {Date}
      - WhatsOnTheMenuIntent what is for {Meal} on {Date}
-  - Interaction Model
-    - Endpoint type: HTTPS
-    - Default: The endpoint wherever you deployed this
-  - SSL Certificate
-    - Since mine is in Azure, I choose "My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority"
+   - Interaction Model
+     - Endpoint type: HTTPS
+     - Default: The endpoint wherever you deployed this
+   - SSL Certificate
+     - Since mine is in Azure, I choose "My development endpoint is a sub-domain of a domain that has a wildcard certificate from a certificate authority"
     
 
 IMPORTANT: If you plan on making your skill publicly available, you need to copy the Application ID from the Skill Information section, and add that to the SchoolSkill constructor in your controller.
